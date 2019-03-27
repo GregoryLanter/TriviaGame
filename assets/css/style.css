@@ -1,0 +1,36 @@
+*{
+    border: 1px solid blue;
+}
+.outline{
+    height: 450px;
+}
+#game{
+    height:300px;
+}
+.space{
+    height: 150px;
+}
+.container{
+    height: 45px;
+}
+.qContainer{
+    display: none;
+    position: relative;
+    height: 300px;
+    z-index: 0;
+    /*top: -300px;*/
+}
+.start{
+    position: relative;
+    top: 45%;
+    left: 40%;
+    height: 35px;
+}
+.startContainer{
+    position: relative;
+    top: 0px;
+    left: -15px;
+    height: 297px;
+    width: 914px;
+    
+}
