@@ -1,14 +1,27 @@
 /**{
     border: 1px solid blue;
 }*/
+body{
+    width: 1300px;
+}
 .outline{
     height: 500px;
+    width: 1300px;
 }
 #game{
     height:350px;
+    padding: 0px;
+    left: 14px;
 }
 .space{
+    font-family: 'Germania One', cursive;
+    font-size: 100px;
     height: 150px;
+    width: 1339px;
+    left: 5px;
+    background-color: gray;
+    margin: 0px;
+    text-align: center;
 }
 .container{
     height: 45px;
@@ -19,7 +32,6 @@
     height: 350px;
     z-index: 0;
     background-image: url(../images/halftone-yellow.png);
-    /*top: -300px;*/
 }
 .start{
     position: relative;
@@ -39,6 +51,7 @@
 .answer{
     text-align: center;
     font-size: 25px;
+    margin: 3px;
 }
 #timer{
     text-align: center;
@@ -53,13 +66,18 @@
     height: 65px;
     background-image: url(../images/halftone-yellow.png);
 }
-.side{ 
+#beer{ 
     background-image: url(../images/beer.jpg);
     background-position-x: -15px;
     background-position-y: -15px;
+    background-size: 1375px 395px;
+    background-repeat: no-repeat;
     padding: 0px;
 }
-
+.side{
+    background: transparent;
+    padding: 0px;
+}
 .img{
     border-style: solid;
     border-color: black;
@@ -71,10 +89,14 @@
     width: 150px;
 }
 .picHolder{
-    border: 1px solid blue;
     position: relative;
     top: -119px;
     left: 0px;
     width: 100%;
     height: 150px;
+}
+.belleville{
+    position: relative;
+    left: 43;
+    height: 100%;
 }

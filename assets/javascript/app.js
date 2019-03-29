@@ -209,6 +209,8 @@ $(document).ready(function(){//start game
     var correctCount;
     var wrongCount;
     var unansweredCount;
+    var used = [];
+    var modeAnswering;
 
     card.push(q1);
     card.push(q2);
@@ -233,7 +235,16 @@ $(document).ready(function(){//start game
 
 //get a question
     function getQuestion(){
-        return(Math.floor(Math.random() * card.length));
+        var bool = true;
+        var num;
+        for(;bool;){
+            num = Math.floor(Math.random() * card.length);
+            if(used.indexOf(num) == -1){
+                used.push(num)
+                bool = false;
+            };
+        }
+        return num;
     }
 
     function displayQ(){
@@ -248,12 +259,13 @@ $(document).ready(function(){//start game
         $("#a3").text(question.a3);
         $("#a4").text(question.a4);
         $("#"+question.correct).attr("value", "correct");
+        modeAnswering = true;
     }
     function updateQ(correct, answer){
+        modeAnswering = false;
         if(correct == "correct"){
             $("#q").text(answer + " is Correct!");
             $("#a1").text(" ");
-            imageClass = "imgRight";
         }else{
             if(correct == "wrong"){
                 $("#q").text("Sorry that was not correct!");
@@ -308,7 +320,11 @@ $(document).ready(function(){//start game
         wrongCount = 0;
         correctCount = 0;
         unansweredCount = 0;
+        for(;used.length != 0;){
+            used.pop(used[0]);
+        }
         run();
+
     }
     function answer(){
         switch(selectedCard.correct){
@@ -329,6 +345,7 @@ $(document).ready(function(){//start game
     function endScreen(){
         clearInterval(nextInterval);
         clearInterval(intervalId);
+        $(".picHolder").css("display", "none");
         $("#q").text("Complete! Here are your results");
         $("#a1").text("Correct: " + correctCount);
         $("#a2").text("Wrong: " + wrongCount);
@@ -342,6 +359,7 @@ $(document).ready(function(){//start game
     });
 
     $(".answer").on("click", function(event){
+        $(this).css("background-color", "transparent");
         clearInterval(intervalId);
         if(event.target.id == selectedCard.correct){
             correctCount++;
@@ -358,7 +376,13 @@ $(document).ready(function(){//start game
         //run();
     });
 
-    $(".answer").hover(function(element){
-        $(element.target.id).css("background-color", "red");
+    $(".answer").mouseover(function(){
+        if(modeAnswering){
+            $(this).css("background-color", "red");
+        }
+    });
+
+    $(".answer").mouseleave(function(){
+        $(this).css("background-color", "transparent");
     });
 });
