@@ -1,6 +1,8 @@
 $(document).ready(function(){//start game
     //declate variables
-    var card = [];
+    var card = []; //array to hold question objects
+
+    //question objects
     var q1 = {
         id: 1,
         q: "Beer is the second most popular beverage in the world. What is the first?",
@@ -211,7 +213,9 @@ $(document).ready(function(){//start game
     var unansweredCount;
     var used = [];
     var modeAnswering;
+    var modeReset;
 
+    //load question objects into the array
     card.push(q1);
     card.push(q2);
     card.push(q3);
@@ -233,7 +237,7 @@ $(document).ready(function(){//start game
     card.push(q19);
     card.push(q20);
 
-//get a question
+//get a question make sure not to repeat a question
     function getQuestion(){
         var bool = true;
         var num;
@@ -247,6 +251,7 @@ $(document).ready(function(){//start game
         return num;
     }
 
+    //display the question
     function displayQ(){
         var qNum = getQuestion();
         var question = card[qNum];
@@ -259,29 +264,39 @@ $(document).ready(function(){//start game
         $("#a3").text(question.a3);
         $("#a4").text(question.a4);
         $("#"+question.correct).attr("value", "correct");
-        modeAnswering = true;
+        modeAnswering = true; //use this to control mouseover events
     }
+
+    //check the answer
     function updateQ(correct, answer){
         modeAnswering = false;
         if(correct == "correct"){
+            //correct answer
             $("#q").text(answer + " is Correct!");
             $("#a1").text(" ");
         }else{
+            //wrong answer
             if(correct == "wrong"){
                 $("#q").text("Sorry that was not correct!");
             }else{
+                //time out
                 $("#q").text("Sorry you are out of time!");
             }
             $("#a1").text("The correct answer was: " + answer);
         }
+        //clear answers
         $("#a2").text(" ");
         $("#a3").text(" ");
         $("#a4").text(" ");
+        //after 10 questions the game is over
         if(correctCount+wrongCount+unansweredCount == 10){
+            //game is over, after three seconds of displaying the correct answer move to the end screen
             nextInterval = setInterval(endScreen, 3000);
         }else{  
-            nextInterval = setInterval(run, 2000);
+            //next question after 3 seconds of displaying correct answer
+            nextInterval = setInterval(run, 3000);
         }
+        // show the picture
         $(".picHolder").css("display","block");
         var img = $("<img id ='pic' class='img' />").attr({
             src: "../TriviaGame/assets/images/" + selectedCard.image,
@@ -291,6 +306,7 @@ $(document).ready(function(){//start game
         
     };
 
+    //update timer on the screen
     function updateTimer(){
         timer--;
         $("#timer").text("Time remaining: "+ timer +" seconds");
@@ -300,11 +316,13 @@ $(document).ready(function(){//start game
         }
     }
 
+    //time out with no answer 
     function endQ(){
         unansweredCount++;
         updateQ("outOfTime", answer())
     }
 
+    //start a question
     function run(){
         timer = 31;
         clearInterval(intervalId);
@@ -316,7 +334,10 @@ $(document).ready(function(){//start game
         displayQ();
 
     }
+
+    //reset the game
     function reset(){
+        modeReset = false;
         wrongCount = 0;
         correctCount = 0;
         unansweredCount = 0;
@@ -326,6 +347,8 @@ $(document).ready(function(){//start game
         run();
 
     }
+
+    //check for a correct answer
     function answer(){
         switch(selectedCard.correct){
             case "a1":
@@ -342,7 +365,10 @@ $(document).ready(function(){//start game
                 break;
         }
     }
+
+    //display the end screen
     function endScreen(){
+        modeReset = true;
         clearInterval(nextInterval);
         clearInterval(intervalId);
         $(".picHolder").css("display", "none");
@@ -354,21 +380,26 @@ $(document).ready(function(){//start game
         selectedCard = "";
     }
 
+    //handle start button clicks and start the game
     $(".start").on("click", function(){
         reset();
     });
 
+    //answer has been clicked
     $(".answer").on("click", function(event){
         $(this).css("background-color", "transparent");
         clearInterval(intervalId);
+        //CORRECT answer
         if(event.target.id == selectedCard.correct){
             correctCount++;
             updateQ("correct", answer());
         }else{
+            //WRONG answer
             if(event.target.textContent != "Start Over"){
                 wrongCount++;
                 updateQ("wrong", answer());
             }else{
+                //start game over
                 reset();
 
             }
@@ -376,13 +407,27 @@ $(document).ready(function(){//start game
         //run();
     });
 
+    //color answer on mouse over
     $(".answer").mouseover(function(){
         if(modeAnswering){
             $(this).css("background-color", "red");
         }
     });
 
+    //turn off color
     $(".answer").mouseleave(function(){
+        $(this).css("background-color", "transparent");
+    });
+
+    //color start over
+    $("#a4").mouseover(function(){
+        if(modeReset){
+            $(this).css("background-color", "red");
+        }
+    });
+
+    //turn off color
+    $("#a4").mouseleave(function(){
         $(this).css("background-color", "transparent");
     });
 });

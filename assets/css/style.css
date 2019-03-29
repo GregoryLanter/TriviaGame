@@ -13,6 +13,8 @@ body{
     padding: 0px;
     left: 14px;
 }
+
+/*top of the page title*/
 .space{
     font-family: 'Germania One', cursive;
     font-size: 100px;
@@ -26,6 +28,8 @@ body{
 .container{
     height: 45px;
 }
+
+/*div to hold questions*/
 .qContainer{
     display: none;
     position: relative;
@@ -33,12 +37,16 @@ body{
     z-index: 0;
     background-image: url(../images/halftone-yellow.png);
 }
+
+/*start button*/
 .start{
     position: relative;
     top: 45%;
     left: 43%;
     height: 35px;
 }
+
+/*start up screen*/
 .startContainer{
     position: relative;
     top: 0px;
@@ -48,16 +56,22 @@ body{
     background-image:url(../images/halftone-yellow.png); 
     
 }
+
+/*answers*/
 .answer{
     text-align: center;
     font-size: 25px;
     margin: 3px;
 }
+
+/*timer display*/
 #timer{
     text-align: center;
     font-size: 25px;
     font-weight: bold;
 }
+
+/*stlye for question background*/
 /*Q must be after container*/
 #q{
     text-align: center;
@@ -66,6 +80,8 @@ body{
     height: 65px;
     background-image: url(../images/halftone-yellow.png);
 }
+
+/*background image*/
 #beer{ 
     background-image: url(../images/beer.jpg);
     background-position-x: -15px;
@@ -74,10 +90,14 @@ body{
     background-repeat: no-repeat;
     padding: 0px;
 }
+
+/*sides of the page*/
 .side{
     background: transparent;
     padding: 0px;
 }
+
+/* not used
 .img{
     border-style: solid;
     border-color: black;
@@ -87,7 +107,9 @@ body{
     top: 0px;
     height: 150px;
     width: 150px;
-}
+}*/
+
+/*holder for the correct image*/
 .picHolder{
     position: relative;
     top: -119px;
@@ -95,8 +117,10 @@ body{
     width: 100%;
     height: 150px;
 }
+
+/* image styling for mascot*/
 .belleville{
     position: relative;
-    left: 43;
+    left: 43%;
     height: 100%;
 }
