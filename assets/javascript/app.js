@@ -214,6 +214,22 @@ $(document).ready(function(){//start game
     card.push(q2);
     card.push(q3);
     card.push(q4);
+    card.push(q5);
+    card.push(q6);
+    card.push(q7);
+    card.push(q8);
+    card.push(q9);
+    card.push(q10);
+    card.push(q11);
+    card.push(q12);
+    card.push(q13);
+    card.push(q14);
+    card.push(q15);
+    card.push(q16);
+    card.push(q17);
+    card.push(q18);
+    card.push(q19);
+    card.push(q20);
 
 //get a question
     function getQuestion(){
@@ -237,6 +253,7 @@ $(document).ready(function(){//start game
         if(correct == "correct"){
             $("#q").text(answer + " is Correct!");
             $("#a1").text(" ");
+            imageClass = "imgRight";
         }else{
             if(correct == "wrong"){
                 $("#q").text("Sorry that was not correct!");
@@ -251,8 +268,15 @@ $(document).ready(function(){//start game
         if(correctCount+wrongCount+unansweredCount == 10){
             nextInterval = setInterval(endScreen, 3000);
         }else{  
-            nextInterval = setInterval(run, 3000)
+            nextInterval = setInterval(run, 2000);
         }
+        $(".picHolder").css("display","block");
+        var img = $("<img id ='pic' class='img' />").attr({
+            src: "../TriviaGame/assets/images/" + selectedCard.image,
+            alt: selectedCard.image,
+            width: 250,
+        }).appendTo('.picHolder');
+        
     };
 
     function updateTimer(){
@@ -275,7 +299,10 @@ $(document).ready(function(){//start game
         clearInterval(nextInterval);
         updateTimer();
         intervalId = setInterval(updateTimer, 1000);
+        $("#pic").remove();
+        $(".picHolder").css("display", "none");
         displayQ();
+
     }
     function reset(){
         wrongCount = 0;
